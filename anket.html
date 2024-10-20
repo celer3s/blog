@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anket</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Müzik Sendromu</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Anasayfa</a></li>
+                <li><a href="hakkinda.html">Hakkında</a></li>
+                <li><a href="anket.html">Anket</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>                
+        </nav>
+    </header>
+    
+    <main>
+        <section id="survey">
+            <h2>Aşağıdaki müzik gruplarından en sevdiğiniz hangisidir?</h2>
+            <form id="surveyForm">
+                <label>
+                    <input type="radio" name="band" value="Rammstein"> Rammstein
+                </label><br>
+                <label>
+                    <input type="radio" name="band" value="Tool"> Tool
+                </label><br>
+                <label>
+                    <input type="radio" name="band" value="Deep Purple"> Deep Purple
+                </label><br>
+                <label>
+                    <input type="radio" name="band" value="The Rolling Stones"> The Rolling Stones
+                </label><br>
+                <button type="submit">Oyu Gönder</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Müzik Sendromu Sitesi. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+        const votes = {
+            "Rammstein": 0,
+            "Tool": 0,
+            "Deep Purple": 0,
+            "The Rolling Stones": 0
+        };
+
+        const surveyForm = document.getElementById('surveyForm');
+        const resultDiv = document.getElementById('result');
+
+        surveyForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Formun gönderilmesini engelle
+
+            const selectedBand = surveyForm.elements['band'].value;
+            if (selectedBand) {
+                votes[selectedBand]++;
+                displayResults();
+            } else {
+                alert('Lütfen bir seçenek işaretleyin.');
+            }
+        });
+
+        function displayResults() {
+            resultDiv.innerHTML = '<h2>Sonuçlar:</h2>';
+            for (const band in votes) {
+                resultDiv.innerHTML += `<p>${band}: ${votes[band]} oy</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
